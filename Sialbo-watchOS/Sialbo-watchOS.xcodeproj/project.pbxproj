@@ -39,9 +39,22 @@
 		850F73C530471427000E8D2A /* Sialbo-watchOS Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sialbo-watchOS Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		850F73E030471428000E8D2A /* Exceptions for "Sialbo-watchOS Watch App" folder in "Sialbo-watchOS Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 850F73C430471427000E8D2A /* Sialbo-watchOS Watch App */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		850F73C930471427000E8D2A /* Sialbo-watchOS Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				850F73E030471428000E8D2A /* Exceptions for "Sialbo-watchOS Watch App" folder in "Sialbo-watchOS Watch App" target */,
+			);
 			path = "Sialbo-watchOS Watch App";
 			sourceTree = "<group>";
 		};
@@ -319,6 +332,7 @@
 				DEVELOPMENT_TEAM = GP2ML5Q5AN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Sialbo-watchOS Watch App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Sialbo-watchOS";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -352,6 +366,7 @@
 				DEVELOPMENT_TEAM = GP2ML5Q5AN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Sialbo-watchOS Watch App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Sialbo-watchOS";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
