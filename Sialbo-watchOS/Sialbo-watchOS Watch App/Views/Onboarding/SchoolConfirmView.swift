@@ -17,16 +17,11 @@ struct SchoolConfirmView: View {
                 .ignoresSafeArea()
 
             VStack {
-                LogoHeaderView()
-                    .padding(.top, 15)
-
-                Spacer()
-                    .frame(height: 33)
-
                 Text(school.name)
                     .font(.griun(20))
                     .foregroundStyle(.titleYellow)
                     .multilineTextAlignment(.center)
+                    .padding(.top, 60)
 
                 Spacer()
                     .frame(height: 6)

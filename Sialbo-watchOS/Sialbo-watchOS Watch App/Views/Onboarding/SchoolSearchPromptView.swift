@@ -37,7 +37,7 @@ struct SchoolSearchPromptView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)
-            .padding(.bottom, 20)
+            .padding(.bottom, 17)
         }
     }
 }   
