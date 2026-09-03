@@ -11,7 +11,15 @@ struct SchoolNotFoundView: View {
     @Binding var path: [OnboardingRoute]
 
     var body: some View {
-        Text("TODO: 학교를 찾을 수 없습니다")
+        ErrorRetryView(
+            message: "학교를 찾을 수 없어요.",
+            onRetry: {
+                path = []
+            },
+            onDismiss: {
+                path = []
+            }
+        )
     }
 }
 

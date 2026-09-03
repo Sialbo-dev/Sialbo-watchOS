@@ -10,6 +10,8 @@ import SwiftUI
 struct SchoolSearchPromptView: View {
     @Binding var path: [OnboardingRoute]
 
+    @State private var query = ""
+
     var body: some View {
         ZStack {
             Color.clear
@@ -17,10 +19,10 @@ struct SchoolSearchPromptView: View {
 
             VStack {
                 LogoHeaderView()
-                    .padding(.top, 24)
+                    .padding(.top, 20)
 
                 Spacer()
-                    .frame(height: 33)
+                    .frame(height: 28)
 
                 Text("학교를 선택해주세요")
                     .font(.griun(16))
@@ -28,12 +30,13 @@ struct SchoolSearchPromptView: View {
                     .multilineTextAlignment(.center)
 
                 Spacer()
-                    .frame(height: 55)
+                    .frame(height: 35)
 
-                Button("확인") {
-                    path.append(.searchResults)
-                }
-                .buttonStyle(.glass)
+                TextField("학교 이름", text: $query)
+                    .onSubmit {
+                        // TODO: NEISAPIClient 연동 후 결과에 따라 분기
+                        path.append(.searchResults)
+                    }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)
