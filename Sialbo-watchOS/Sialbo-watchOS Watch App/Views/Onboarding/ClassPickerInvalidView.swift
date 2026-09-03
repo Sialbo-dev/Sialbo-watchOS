@@ -11,7 +11,13 @@ struct ClassPickerInvalidView: View {
     @Binding var path: [OnboardingRoute]
 
     var body: some View {
-        Text("TODO: 올바르지 않은 형식입니다")
+        ErrorRetryView(
+            message: "올바르지 않은 형식이에요.",
+            onRetry: {
+                path.removeLast()
+            },
+            messageTopPadding: 20
+        )
     }
 }
 

@@ -11,6 +11,7 @@ struct ErrorRetryView: View {
     let message: String
     let onRetry: () -> Void
     var onDismiss: (() -> Void)? = nil
+    var messageTopPadding: CGFloat = 0
 
     var body: some View {
         ZStack {
@@ -43,6 +44,7 @@ struct ErrorRetryView: View {
                     .font(.griun(15))
                     .foregroundStyle(.errorOrange)
                     .multilineTextAlignment(.center)
+                    .padding(.top, messageTopPadding)
 
                 Spacer()
 
@@ -50,8 +52,8 @@ struct ErrorRetryView: View {
                     .buttonStyle(.glass)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .padding(.horizontal, 8)
-            .padding(.bottom, 8)
+            .padding(.horizontal, 0)
+            .padding(.bottom, -2)
         }
     }
 }
