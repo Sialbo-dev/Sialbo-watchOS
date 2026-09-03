@@ -37,6 +37,12 @@ struct SchoolSearchPromptView: View {
                         // TODO: NEISAPIClient 연동 후 결과에 따라 분기
                         path.append(.searchResults)
                     }
+                    .simultaneousGesture(
+                        TapGesture().onEnded {
+                            // TODO: 음성 입력 연동 후 제거, 지금은 탭으로 바로 검색 결과 테스트
+                            path.append(.searchResults)
+                        }
+                    )
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)
