@@ -17,9 +17,10 @@ struct SchoolSearchPromptView: View {
 
             VStack {
                 LogoHeaderView()
+                    .padding(.top, 24)
 
                 Spacer()
-                    .frame(height: 31)
+                    .frame(height: 33)
 
                 Text("학교를 선택해주세요")
                     .font(.griun(16))
@@ -27,7 +28,7 @@ struct SchoolSearchPromptView: View {
                     .multilineTextAlignment(.center)
 
                 Spacer()
-                    .frame(height: 70.5)
+                    .frame(height: 55)
 
                 Button("확인") {
                     path.append(.searchResults)
@@ -35,8 +36,8 @@ struct SchoolSearchPromptView: View {
                 .buttonStyle(.glass)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .padding(.horizontal, 12)
-            .padding(.bottom, 12)
+            .padding(.horizontal, 0)
+            .padding(.bottom, 20)
         }
     }
 }   
