@@ -16,7 +16,13 @@ struct SchoolSetupFlowView: View {
                 .navigationDestination(for: OnboardingRoute.self) { route in
                     switch route {
                     case .searchResults:
-                        SchoolSearchResultsView(path: $path)
+                        SchoolSearchResultsView(
+                            path: $path,
+                            schools: [
+                                School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울특별시 서초구 효령로 197"),
+                                School(officeCode: "B10", schoolCode: "7010570", name: "서울고등학교", address: "서울특별시 서초구 우와아앙로"),
+                            ]
+                        )
                     case .notFound:
                         SchoolNotFoundView(path: $path)
                     case .confirm(let school):
