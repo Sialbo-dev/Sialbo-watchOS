@@ -7,14 +7,15 @@ import SwiftUI
 
 struct TimetableView: View {
     let schedules: [DaySchedule]
-    var onMenuTap: () -> Void
+    var onChangeClass: () -> Void
+    var onChangeSchool: () -> Void
 
     @State private var selectedIndex = 0
 
     var body: some View {
         TabView(selection: $selectedIndex) {
             ForEach(schedules.indices, id: \.self) { index in
-                DayTimetableView(schedule: schedules[index], onMenuTap: onMenuTap)
+                DayTimetableView(schedule: schedules[index], onChangeClass: onChangeClass, onChangeSchool: onChangeSchool)
                     .tag(index)
             }
         }
@@ -24,7 +25,10 @@ struct TimetableView: View {
 
 private struct DayTimetableView: View {
     let schedule: DaySchedule
-    var onMenuTap: () -> Void
+    var onChangeClass: () -> Void
+    var onChangeSchool: () -> Void
+
+    @State private var showsMenu = false
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -51,13 +55,17 @@ private struct DayTimetableView: View {
 
                 HStack {
                     Button {
-                        onMenuTap()
+                        showsMenu = true
                     } label: {
                         Image(systemName: "ellipsis")
                     }
                     .buttonStyle(.glass)
                     .buttonBorderShape(.circle)
                     .frame(width: 32, height: 32)
+                    .confirmationDialog("", isPresented: $showsMenu) {
+                        Button("학급 변경", action: onChangeClass)
+                        Button("학교 변경", action: onChangeSchool)
+                    }
 
                     Spacer()
                 }
@@ -111,5 +119,5 @@ private struct PeriodRowView: View {
 }
 
 #Preview {
-    TimetableView(schedules: DaySchedule.sampleWeek) {}
+    TimetableView(schedules: DaySchedule.sampleWeek, onChangeClass: {}, onChangeSchool: {})
 }
