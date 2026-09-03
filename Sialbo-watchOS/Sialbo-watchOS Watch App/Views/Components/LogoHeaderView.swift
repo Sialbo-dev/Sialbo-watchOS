@@ -19,6 +19,7 @@ struct LogoHeaderView: View {
             Text(title)
                 .font(.griun(16))
                 .foregroundStyle(.logoGold)
+                .offset(y: 1)
         }
     }
 }
