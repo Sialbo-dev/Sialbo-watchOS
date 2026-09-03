@@ -18,7 +18,7 @@ struct ClassPickerView: View {
 
 #Preview {
     ClassPickerView(
-        school: School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교"),
+        school: School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울 효성구 어쩌구 어쩌로"),
         path: .constant([])
     )
 }
