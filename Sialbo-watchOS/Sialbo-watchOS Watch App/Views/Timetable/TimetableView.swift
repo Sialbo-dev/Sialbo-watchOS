@@ -6,20 +6,58 @@
 import SwiftUI
 
 struct TimetableView: View {
+    let school: School
     let schedules: [DaySchedule]
-    var onChangeClass: () -> Void
-    var onChangeSchool: () -> Void
 
     @State private var selectedIndex = 0
+    @State private var sheet: TimetableSheet?
 
     var body: some View {
         TabView(selection: $selectedIndex) {
             ForEach(schedules.indices, id: \.self) { index in
-                DayTimetableView(schedule: schedules[index], onChangeClass: onChangeClass, onChangeSchool: onChangeSchool)
-                    .tag(index)
+                DayTimetableView(
+                    schedule: schedules[index],
+                    onChangeClass: { sheet = .changeClass },
+                    onChangeSchool: { sheet = .changeSchool }
+                )
+                .tag(index)
             }
         }
         .tabViewStyle(.page)
+        .sheet(item: $sheet) { sheet in
+            switch sheet {
+            case .changeClass:
+                ClassChangeFlowView(school: school)
+            case .changeSchool:
+                SchoolSetupFlowView()
+            }
+        }
+    }
+}
+
+private enum TimetableSheet: Identifiable {
+    case changeClass
+    case changeSchool
+
+    var id: Self { self }
+}
+
+private struct ClassChangeFlowView: View {
+    let school: School
+    @State private var path: [OnboardingRoute] = []
+
+    var body: some View {
+        NavigationStack(path: $path) {
+            ClassPickerView(school: school, path: $path)
+                .navigationDestination(for: OnboardingRoute.self) { route in
+                    switch route {
+                    case .classPickerInvalid:
+                        ClassPickerInvalidView(path: $path)
+                    default:
+                        EmptyView()
+                    }
+                }
+        }
     }
 }
 
@@ -119,5 +157,8 @@ private struct PeriodRowView: View {
 }
 
 #Preview {
-    TimetableView(schedules: DaySchedule.sampleWeek, onChangeClass: {}, onChangeSchool: {})
+    TimetableView(
+        school: School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울특별시 서초구 효령로 197"),
+        schedules: DaySchedule.sampleWeek
+    )
 }
