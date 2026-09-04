@@ -11,4 +11,5 @@ enum ScheduleSetupRoute: Hashable {
     case dayStart
     case lunchStart
     case lunchEnd
+    case complete
 }

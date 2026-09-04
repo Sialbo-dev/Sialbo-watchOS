@@ -36,6 +36,10 @@ struct ScheduleSetupFlowView: View {
                     }
                 case .lunchEnd:
                     TimePickerView(title: "점심시간 종료 시간", hour: $lunchEndHour, minute: $lunchEndMinute) {
+                        path.append(.complete)
+                    }
+                case .complete:
+                    ScheduleCompleteView {
                         onFinish(
                             ScheduleSettings(
                                 dayStartTime: DateComponents(hour: dayStartHour, minute: dayStartMinute),
