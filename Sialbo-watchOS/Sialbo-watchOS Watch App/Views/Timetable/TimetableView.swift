@@ -11,25 +11,34 @@ struct TimetableView: View {
 
     @State private var selectedIndex = 0
     @State private var sheet: TimetableSheet?
+    @AppStorage("hasSeenSwipeGuide") private var hasSeenSwipeGuide = false
 
     var body: some View {
-        TabView(selection: $selectedIndex) {
-            ForEach(schedules.indices, id: \.self) { index in
-                DayTimetableView(
-                    schedule: schedules[index],
-                    onChangeClass: { sheet = .changeClass },
-                    onChangeSchool: { sheet = .changeSchool }
-                )
-                .tag(index)
+        ZStack {
+            TabView(selection: $selectedIndex) {
+                ForEach(schedules.indices, id: \.self) { index in
+                    DayTimetableView(
+                        schedule: schedules[index],
+                        onChangeClass: { sheet = .changeClass },
+                        onChangeSchool: { sheet = .changeSchool }
+                    )
+                    .tag(index)
+                }
             }
-        }
-        .tabViewStyle(.page)
-        .sheet(item: $sheet) { sheet in
-            switch sheet {
-            case .changeClass:
-                ClassChangeFlowView(school: school)
-            case .changeSchool:
-                SchoolSetupFlowView()
+            .tabViewStyle(.page)
+            .sheet(item: $sheet) { sheet in
+                switch sheet {
+                case .changeClass:
+                    ClassChangeFlowView(school: school)
+                case .changeSchool:
+                    SchoolSetupFlowView()
+                }
+            }
+
+            if !hasSeenSwipeGuide {
+                SwipeGuideOverlay {
+                    hasSeenSwipeGuide = true
+                }
             }
         }
     }
