@@ -18,27 +18,6 @@ struct ErrorRetryView: View {
             Color.clear
                 .ignoresSafeArea()
 
-            if let onDismiss {
-                VStack {
-                    HStack {
-                        Button {
-                            onDismiss()
-                        } label: {
-                            Image(systemName: "xmark")
-                        }
-                        .buttonStyle(.glass)
-                        .buttonBorderShape(.circle)
-                        .frame(width: 34, height: 34)
-
-                        Spacer()
-                    }
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .padding(.horizontal, 8)
-                .padding(.top, 8)
-            }
-
             VStack {
                 Text(message)
                     .font(.griun(15))
@@ -54,6 +33,17 @@ struct ErrorRetryView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)
             .padding(.bottom, -2)
+        }
+        .toolbar {
+            if let onDismiss {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        onDismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+            }
         }
     }
 }

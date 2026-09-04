@@ -20,6 +20,7 @@ struct SchoolNotFoundView: View {
                 path = []
             }
         )
+        .navigationBarBackButtonHidden(true)
     }
 }
 
