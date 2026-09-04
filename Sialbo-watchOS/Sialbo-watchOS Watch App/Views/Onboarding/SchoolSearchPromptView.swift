@@ -33,15 +33,10 @@ struct SchoolSearchPromptView: View {
                     .frame(height: 35)
 
                 TextField("학교 이름", text: $query)
-                    .onSubmit {
-                        // TODO: NEISAPIClient 연동 후 결과에 따라 분기
-                        path.append(.searchResults)
-                    }
+                    .onSubmit(handleSearch)
                     .simultaneousGesture(
-                        TapGesture().onEnded {
-                            // TODO: 음성 입력 연동 후 제거, 지금은 탭으로 바로 검색 결과 테스트
-                            path.append(.searchResults)
-                        }
+                        // TODO: 음성 입력 연동 후 제거, 지금은 탭으로 바로 검색 테스트
+                        TapGesture().onEnded(handleSearch)
                     )
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -49,7 +44,16 @@ struct SchoolSearchPromptView: View {
             .padding(.bottom, 17)
         }
     }
-}   
+
+    private func handleSearch() {
+        // TODO: NEISAPIClient 연동 후 실제 검색 결과로 교체
+        if query.trimmingCharacters(in: .whitespaces).isEmpty {
+            path.append(.notFound)
+        } else {
+            path.append(.searchResults)
+        }
+    }
+}
 
 #Preview {
     SchoolSearchPromptView(path: .constant([]))
