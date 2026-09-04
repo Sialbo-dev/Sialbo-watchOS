@@ -75,8 +75,6 @@ private struct DayTimetableView: View {
     var onChangeClass: () -> Void
     var onChangeSchool: () -> Void
 
-    @State private var showsMenu = false
-
     var body: some View {
         ScrollViewReader { proxy in
             List(schedule.periods) { period in
@@ -94,33 +92,7 @@ private struct DayTimetableView: View {
             }
         }
         .safeAreaInset(edge: .top) {
-            ZStack {
-                Color.black
-                    .ignoresSafeArea(edges: .top)
-
-                LogoHeaderView(title: headerTitle)
-
-                HStack {
-                    Button {
-                        showsMenu = true
-                    } label: {
-                        Image(systemName: "ellipsis")
-                    }
-                    .buttonStyle(.glass)
-                    .buttonBorderShape(.circle)
-                    .frame(width: 32, height: 32)
-                    .confirmationDialog("", isPresented: $showsMenu) {
-                        Button("학급 변경", action: onChangeClass)
-                        Button("학교 변경", action: onChangeSchool)
-                    }
-
-                    Spacer()
-                }
-                .padding(.horizontal, 8)
-            }
-            .frame(height: 40)
-            .offset(y: -45)
-            .padding(.bottom, -45)
+            TimetableHeaderView(title: headerTitle, onChangeClass: onChangeClass, onChangeSchool: onChangeSchool)
         }
     }
 
