@@ -41,6 +41,15 @@ struct TimetableView: View {
                 }
             }
         }
+        .onAppear(perform: saveTodayPeriodsForWidget)
+    }
+
+    private func saveTodayPeriodsForWidget() {
+        let today = schedules.first { Calendar.current.isDateInToday($0.date) }
+        let periods = (today?.periods ?? []).map {
+            SharedPeriodInfo(subject: $0.subject, startTime: $0.startTime, endTime: $0.endTime)
+        }
+        SharedTimetableStore.save(periods)
     }
 }
 
