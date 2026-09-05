@@ -18,9 +18,10 @@ struct ScheduleCompleteView: View {
             VStack {
                 LogoHeaderView()
                     .padding(.top, 5)
+                    .ignoresSafeArea(edges: .top)
 
                 Spacer()
-                    .frame(height: 35)
+                    .frame(height: 30)
 
                 Text("설정을 완료했어요!")
                     .font(.griun(16))

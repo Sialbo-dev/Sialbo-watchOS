@@ -16,11 +16,18 @@ struct ScheduleIntroView: View {
                 .ignoresSafeArea()
 
             VStack {
+                LogoHeaderView()
+                    .padding(.top, 12)
+                    .ignoresSafeArea(edges: .top)
+
+                Spacer()
+                    .frame(height: 5)
+
                 Text("다음 수업을\n미리 알려드릴게요")
                     .font(.griun(16))
                     .foregroundStyle(.titleYellow)
                     .multilineTextAlignment(.center)
-                    .padding(.top, 15)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 Spacer()
                     .frame(height: 12)
@@ -29,6 +36,10 @@ struct ScheduleIntroView: View {
                     .font(.griun(13))
                     .foregroundStyle(.titleYellow)
                     .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Spacer()
+                    .frame(height: 20)
 
                 Spacer()
 
