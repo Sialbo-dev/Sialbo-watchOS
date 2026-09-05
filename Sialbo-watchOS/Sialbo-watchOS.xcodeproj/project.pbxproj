@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		850F73C630471427000E8D2A /* Sialbo-watchOS Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 850F73C530471427000E8D2A /* Sialbo-watchOS Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		85CD1A21304BE034007FA558 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85CD1A20304BE034007FA558 /* WidgetKit.framework */; };
+		85CD1A23304BE034007FA558 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85CD1A22304BE034007FA558 /* SwiftUI.framework */; };
+		85CD1A2E304BE035007FA558 /* Sialbo-watchOS-WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 85CD1A1E304BE034007FA558 /* Sialbo-watchOS-WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -17,6 +20,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 850F73C430471427000E8D2A;
 			remoteInfo = "Sialbo-watchOS Watch App";
+		};
+		85CD1A2C304BE035007FA558 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 850F73B930471427000E8D2A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85CD1A1D304BE034007FA558;
+			remoteInfo = "Sialbo-watchOS-WidgetExtension";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -32,11 +42,26 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85CD1A33304BE035007FA558 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				85CD1A2E304BE035007FA558 /* Sialbo-watchOS-WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		850F73BF30471427000E8D2A /* Sialbo-watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sialbo-watchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		850F73C530471427000E8D2A /* Sialbo-watchOS Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sialbo-watchOS Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		85CD1A1E304BE034007FA558 /* Sialbo-watchOS-WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Sialbo-watchOS-WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		85CD1A20304BE034007FA558 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		85CD1A22304BE034007FA558 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		85CD1A35304BE0C3007FA558 /* Sialbo-watchOS-WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Sialbo-watchOS-WidgetExtension.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -46,6 +71,13 @@
 				Info.plist,
 			);
 			target = 850F73C430471427000E8D2A /* Sialbo-watchOS Watch App */;
+		};
+		85CD1A32304BE035007FA558 /* Exceptions for "Sialbo-watchOS-Widget" folder in "Sialbo-watchOS-WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 85CD1A1D304BE034007FA558 /* Sialbo-watchOS-WidgetExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -58,6 +90,14 @@
 			path = "Sialbo-watchOS Watch App";
 			sourceTree = "<group>";
 		};
+		85CD1A24304BE034007FA558 /* Sialbo-watchOS-Widget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				85CD1A32304BE035007FA558 /* Exceptions for "Sialbo-watchOS-Widget" folder in "Sialbo-watchOS-WidgetExtension" target */,
+			);
+			path = "Sialbo-watchOS-Widget";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,13 +108,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85CD1A1B304BE034007FA558 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85CD1A23304BE034007FA558 /* SwiftUI.framework in Frameworks */,
+				85CD1A21304BE034007FA558 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		850F73B830471427000E8D2A = {
 			isa = PBXGroup;
 			children = (
+				85CD1A35304BE0C3007FA558 /* Sialbo-watchOS-WidgetExtension.entitlements */,
 				850F73C930471427000E8D2A /* Sialbo-watchOS Watch App */,
+				85CD1A24304BE034007FA558 /* Sialbo-watchOS-Widget */,
+				85CD1A1F304BE034007FA558 /* Frameworks */,
 				850F73C030471427000E8D2A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,8 +136,18 @@
 			children = (
 				850F73BF30471427000E8D2A /* Sialbo-watchOS.app */,
 				850F73C530471427000E8D2A /* Sialbo-watchOS Watch App.app */,
+				85CD1A1E304BE034007FA558 /* Sialbo-watchOS-WidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		85CD1A1F304BE034007FA558 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				85CD1A20304BE034007FA558 /* WidgetKit.framework */,
+				85CD1A22304BE034007FA558 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,10 +179,12 @@
 				850F73C130471427000E8D2A /* Sources */,
 				850F73C230471427000E8D2A /* Frameworks */,
 				850F73C330471427000E8D2A /* Resources */,
+				85CD1A33304BE035007FA558 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				85CD1A2D304BE035007FA558 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				850F73C930471427000E8D2A /* Sialbo-watchOS Watch App */,
@@ -132,6 +196,28 @@
 			productReference = 850F73C530471427000E8D2A /* Sialbo-watchOS Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		85CD1A1D304BE034007FA558 /* Sialbo-watchOS-WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85CD1A2F304BE035007FA558 /* Build configuration list for PBXNativeTarget "Sialbo-watchOS-WidgetExtension" */;
+			buildPhases = (
+				85CD1A1A304BE034007FA558 /* Sources */,
+				85CD1A1B304BE034007FA558 /* Frameworks */,
+				85CD1A1C304BE034007FA558 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				85CD1A24304BE034007FA558 /* Sialbo-watchOS-Widget */,
+			);
+			name = "Sialbo-watchOS-WidgetExtension";
+			packageProductDependencies = (
+			);
+			productName = "Sialbo-watchOS-WidgetExtension";
+			productReference = 85CD1A1E304BE034007FA558 /* Sialbo-watchOS-WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -139,7 +225,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2650;
+				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2650;
 				TargetAttributes = {
 					850F73BE30471427000E8D2A = {
@@ -147,6 +233,9 @@
 					};
 					850F73C430471427000E8D2A = {
 						CreatedOnToolsVersion = 26.5;
+					};
+					85CD1A1D304BE034007FA558 = {
+						CreatedOnToolsVersion = 26.6;
 					};
 				};
 			};
@@ -166,6 +255,7 @@
 			targets = (
 				850F73BE30471427000E8D2A /* Sialbo-watchOS */,
 				850F73C430471427000E8D2A /* Sialbo-watchOS Watch App */,
+				85CD1A1D304BE034007FA558 /* Sialbo-watchOS-WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -185,10 +275,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85CD1A1C304BE034007FA558 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		850F73C130471427000E8D2A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85CD1A1A304BE034007FA558 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -202,6 +306,11 @@
 			isa = PBXTargetDependency;
 			target = 850F73C430471427000E8D2A /* Sialbo-watchOS Watch App */;
 			targetProxy = 850F73C730471427000E8D2A /* PBXContainerItemProxy */;
+		};
+		85CD1A2D304BE035007FA558 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85CD1A1D304BE034007FA558 /* Sialbo-watchOS-WidgetExtension */;
+			targetProxy = 85CD1A2C304BE035007FA558 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -327,6 +436,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Sialbo-watchOS Watch App/Sialbo-watchOS Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GP2ML5Q5AN;
@@ -361,6 +471,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Sialbo-watchOS Watch App/Sialbo-watchOS Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GP2ML5Q5AN;
@@ -426,6 +537,75 @@
 			};
 			name = Release;
 		};
+		85CD1A30304BE035007FA558 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Sialbo-watchOS-WidgetExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GP2ML5Q5AN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Sialbo-watchOS-Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Sialbo-watchOS-Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "juhui.Sialbo-watchOS.watchkitapp.Sialbo-watchOS-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		85CD1A31304BE035007FA558 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Sialbo-watchOS-WidgetExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GP2ML5Q5AN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Sialbo-watchOS-Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Sialbo-watchOS-Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "juhui.Sialbo-watchOS.watchkitapp.Sialbo-watchOS-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -452,6 +632,15 @@
 			buildConfigurations = (
 				850F73D730471428000E8D2A /* Debug */,
 				850F73D830471428000E8D2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85CD1A2F304BE035007FA558 /* Build configuration list for PBXNativeTarget "Sialbo-watchOS-WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85CD1A30304BE035007FA558 /* Debug */,
+				85CD1A31304BE035007FA558 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
