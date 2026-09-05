@@ -17,7 +17,7 @@ struct ScheduleIntroView: View {
 
             VStack {
                 LogoHeaderView()
-                    .padding(.top, 12)
+                    .padding(.top, 8)
                     .ignoresSafeArea(edges: .top)
 
                 Spacer()
@@ -30,7 +30,7 @@ struct ScheduleIntroView: View {
                     .fixedSize(horizontal: false, vertical: true)
 
                 Spacer()
-                    .frame(height: 12)
+                    .frame(height: 10)
 
                 Text("교시 시간을 계산하기 위해\n3가지 일과 정보를 알려주세요.")
                     .font(.griun(13))
@@ -48,7 +48,7 @@ struct ScheduleIntroView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)
-            .padding(.bottom, -10)
+            .padding(.bottom, 0)
         }
     }
 }

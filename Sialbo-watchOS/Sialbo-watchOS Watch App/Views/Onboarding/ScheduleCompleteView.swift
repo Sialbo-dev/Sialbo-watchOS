@@ -17,7 +17,7 @@ struct ScheduleCompleteView: View {
 
             VStack {
                 LogoHeaderView()
-                    .padding(.top, 13)
+                    .padding(.top, 10)
                     .ignoresSafeArea(edges: .top)
 
                 Spacer()
@@ -37,7 +37,7 @@ struct ScheduleCompleteView: View {
                     .multilineTextAlignment(.center)
 
                 Spacer()
-                    .frame(height: 48)
+                    .frame(height: 37)
 
                 Button("확인", action: onConfirm)
                     .buttonStyle(.glass)

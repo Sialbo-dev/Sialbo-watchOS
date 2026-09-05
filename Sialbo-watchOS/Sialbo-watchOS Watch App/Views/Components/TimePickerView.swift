@@ -23,10 +23,10 @@ struct TimePickerView: View {
                     .font(.griun(16))
                     .foregroundStyle(.titleYellow)
                     .multilineTextAlignment(.center)
-                    .padding(.top, 5)
+                    .padding(.top, 7)
 
                 Spacer()
-                    .frame(height: 15)
+                    .frame(height: 12)
 
                 HStack(spacing: 8) {
                     Picker("시", selection: $hour) {
@@ -53,7 +53,7 @@ struct TimePickerView: View {
                 }
 
                 Spacer()
-                    .frame(height: 15)
+                    .frame(height: 13)
 
                 Spacer()
 
@@ -62,7 +62,7 @@ struct TimePickerView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)
-            .padding(.bottom, 3)
+            .padding(.bottom, -2)
         }
     }
 }
