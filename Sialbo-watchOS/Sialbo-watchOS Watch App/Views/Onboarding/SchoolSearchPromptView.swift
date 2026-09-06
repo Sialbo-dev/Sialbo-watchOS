@@ -34,10 +34,6 @@ struct SchoolSearchPromptView: View {
 
                 TextField("학교 이름", text: $query)
                     .onSubmit(handleSearch)
-                    .simultaneousGesture(
-                        // TODO: 음성 입력 연동 후 제거, 지금은 탭으로 바로 검색 테스트
-                        TapGesture().onEnded(handleSearch)
-                    )
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)
