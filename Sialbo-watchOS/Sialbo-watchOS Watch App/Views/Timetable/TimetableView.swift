@@ -26,12 +26,18 @@ struct TimetableView: View {
                 }
             }
             .tabViewStyle(.page)
-            .sheet(item: $sheet) { sheet in
-                switch sheet {
+            .sheet(item: $sheet) { activeSheet in
+                switch activeSheet {
                 case .changeClass:
-                    ClassChangeFlowView(school: school)
+                    ClassChangeFlowView(school: school) { grade, classNumber in
+                        UserSettingsStore.shared.saveSchool(school, grade: grade, classNumber: classNumber)
+                        sheet = nil
+                    }
                 case .changeSchool:
-                    SchoolSetupFlowView()
+                    SchoolSetupFlowView { school, grade, classNumber in
+                        UserSettingsStore.shared.saveSchool(school, grade: grade, classNumber: classNumber)
+                        sheet = nil
+                    }
                 }
             }
 
@@ -62,11 +68,13 @@ private enum TimetableSheet: Identifiable {
 
 private struct ClassChangeFlowView: View {
     let school: School
+    let onConfirm: (Int, Int) -> Void
+
     @State private var path: [OnboardingRoute] = []
 
     var body: some View {
         NavigationStack(path: $path) {
-            ClassPickerView(school: school, path: $path)
+            ClassPickerView(school: school, path: $path, onConfirm: onConfirm)
                 .navigationDestination(for: OnboardingRoute.self) { route in
                     switch route {
                     case .classPickerInvalid:

@@ -10,6 +10,7 @@ import SwiftUI
 struct ClassPickerView: View {
     let school: School
     @Binding var path: [OnboardingRoute]
+    let onConfirm: (Int, Int) -> Void
 
     @State private var grade = 1
     @State private var classNumber = 1
@@ -51,7 +52,8 @@ struct ClassPickerView: View {
                     .frame(height: 20)
 
                 Button("선택") {
-                    path.append(.classPickerInvalid)
+                    // TODO: NEISAPIClient로 이 학년-반 시간표 존재 확인 후, 없으면 path.append(.classPickerInvalid)
+                    onConfirm(grade, classNumber)
                 }
                 .buttonStyle(.glass)
             }
@@ -65,6 +67,7 @@ struct ClassPickerView: View {
 #Preview {
     ClassPickerView(
         school: School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울 효성구 어쩌구 어쩌로"),
-        path: .constant([])
+        path: .constant([]),
+        onConfirm: { _, _ in }
     )
 }

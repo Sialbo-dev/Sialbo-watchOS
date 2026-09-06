@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SchoolSetupFlowView: View {
+    let onComplete: (School, Int, Int) -> Void
+
     @State private var path: [OnboardingRoute] = []
 
     var body: some View {
@@ -28,7 +30,9 @@ struct SchoolSetupFlowView: View {
                     case .confirm(let school):
                         SchoolConfirmView(school: school, path: $path)
                     case .classPicker(let school):
-                        ClassPickerView(school: school, path: $path)
+                        ClassPickerView(school: school, path: $path) { grade, classNumber in
+                            onComplete(school, grade, classNumber)
+                        }
                     case .classPickerInvalid:
                         ClassPickerInvalidView(path: $path)
                     }
@@ -38,5 +42,5 @@ struct SchoolSetupFlowView: View {
 }
 
 #Preview {
-    SchoolSetupFlowView()
+    SchoolSetupFlowView { _, _, _ in }
 }
