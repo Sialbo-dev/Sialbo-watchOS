@@ -18,6 +18,7 @@ final class UserSettingsStore {
         static let schoolCode = "schoolCode"
         static let schoolName = "schoolName"
         static let schoolAddress = "schoolAddress"
+        static let schoolKind = "schoolKind"
         static let grade = "grade"
         static let classNumber = "classNumber"
         static let scheduleSettings = "scheduleSettings"
@@ -27,9 +28,11 @@ final class UserSettingsStore {
         guard let officeCode = defaults.string(forKey: Key.officeCode),
               let schoolCode = defaults.string(forKey: Key.schoolCode),
               let name = defaults.string(forKey: Key.schoolName),
-              let address = defaults.string(forKey: Key.schoolAddress)
+              let address = defaults.string(forKey: Key.schoolAddress),
+              let kindRawValue = defaults.string(forKey: Key.schoolKind),
+              let kind = SchoolKind(rawValue: kindRawValue)
         else { return nil }
-        return School(officeCode: officeCode, schoolCode: schoolCode, name: name, address: address)
+        return School(officeCode: officeCode, schoolCode: schoolCode, name: name, address: address, kind: kind)
     }
 
     var grade: Int? {
@@ -52,6 +55,7 @@ final class UserSettingsStore {
         defaults.set(school.schoolCode, forKey: Key.schoolCode)
         defaults.set(school.name, forKey: Key.schoolName)
         defaults.set(school.address, forKey: Key.schoolAddress)
+        defaults.set(school.kind.rawValue, forKey: Key.schoolKind)
         defaults.set(grade, forKey: Key.grade)
         defaults.set(classNumber, forKey: Key.classNumber)
     }

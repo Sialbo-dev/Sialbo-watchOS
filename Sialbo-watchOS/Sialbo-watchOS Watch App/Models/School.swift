@@ -11,4 +11,5 @@ struct School: Identifiable, Hashable {
     let schoolCode: String   // 학교 코드 (SD_SCHUL_CODE)
     let name: String
     let address: String
+    let kind: SchoolKind
 }
