@@ -44,7 +44,7 @@ enum PeriodTimeCalculator {
             )
 
             let breakEnd = periodEnd.addingTimeInterval(breakDuration)
-            if periodEnd < lunchStart && breakEnd > lunchStart {
+            if periodEnd <= lunchStart && breakEnd >= lunchStart {
                 currentStart = lunchEnd
             } else {
                 currentStart = breakEnd
