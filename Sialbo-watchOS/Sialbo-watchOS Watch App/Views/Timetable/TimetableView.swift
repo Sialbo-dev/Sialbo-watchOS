@@ -84,7 +84,6 @@ struct TimetableView: View {
         .task { await loadTimetable() }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
-                selectedIndex = todayIndex
                 Task { await loadTimetable() }
             }
         }
@@ -106,6 +105,7 @@ struct TimetableView: View {
                 scheduleSettings: scheduleSettings
             )
             loadFailed = false
+            selectedIndex = todayIndex
         } catch {
             schedules = nil
             loadFailed = true
