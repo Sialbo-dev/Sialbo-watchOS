@@ -32,9 +32,9 @@ struct TimetableView: View {
             if let schedules {
                 ZStack {
                     TabView(selection: $selectedIndex) {
-                        ForEach(schedules.indices, id: \.self) { index in
+                        ForEach(Array(schedules.enumerated()), id: \.element.id) { index, schedule in
                             DayTimetableView(
-                                schedule: schedules[index],
+                                schedule: schedule,
                                 onChangeClass: { sheet = .changeClass },
                                 onChangeSchool: { sheet = .changeSchool }
                             )
