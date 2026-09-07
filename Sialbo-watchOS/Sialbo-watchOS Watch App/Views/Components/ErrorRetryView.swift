@@ -11,7 +11,7 @@ struct ErrorRetryView: View {
     let message: String
     let onRetry: () -> Void
     var onDismiss: (() -> Void)? = nil
-    var messageTopPadding: CGFloat = 0
+    var messageTopPadding: CGFloat = 23
 
     var body: some View {
         ZStack {
