@@ -79,8 +79,11 @@ struct NEISAPIClient {
         let grouped = Dictionary(grouping: rawPeriods) { calendar.startOfDay(for: $0.date) }
 
         return grouped.map { date, periods in
+            // 같은 날짜·같은 교시가 중복으로 오는 경우(시간표 정정 등) 나중 값으로 통일
+            let deduped = Dictionary(periods.map { ($0.periodNumber, $0.subject) }, uniquingKeysWith: { _, latest in latest })
+
             let calculated = PeriodTimeCalculator.periods(
-                from: periods.map { ($0.periodNumber, $0.subject) },
+                from: deduped.map { (periodNumber: $0.key, subject: $0.value) },
                 date: date,
                 scheduleSettings: scheduleSettings,
                 kind: school.kind
