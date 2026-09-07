@@ -16,13 +16,9 @@ struct ScheduleIntroView: View {
                 .ignoresSafeArea()
 
             VStack {
-                LogoHeaderView()
-                    .padding(.top, 8)
-                    .ignoresSafeArea(edges: .top)
-
                 Spacer()
-                    .frame(height: 5)
-
+                    .frame(height: 20)
+                
                 Text("다음 수업을\n미리 알려드릴게요")
                     .font(.griun(16))
                     .foregroundStyle(.titleYellow)
