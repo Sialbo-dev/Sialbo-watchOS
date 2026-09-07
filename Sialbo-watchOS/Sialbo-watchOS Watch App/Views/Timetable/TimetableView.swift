@@ -6,51 +6,113 @@
 import SwiftUI
 
 struct TimetableView: View {
-    let school: School
-    let schedules: [DaySchedule]
+    @State private var school: School
+    @State private var grade: Int
+    @State private var classNumber: Int
+    @State private var scheduleSettings: ScheduleSettings
 
+    @State private var schedules: [DaySchedule]?
+    @State private var loadFailed = false
     @State private var selectedIndex = 0
     @State private var sheet: TimetableSheet?
     @AppStorage("hasSeenSwipeGuide") private var hasSeenSwipeGuide = false
+    @Environment(\.scenePhase) private var scenePhase
+
+    private let apiClient = NEISAPIClient()
+
+    init(school: School, grade: Int, classNumber: Int, scheduleSettings: ScheduleSettings) {
+        _school = State(initialValue: school)
+        _grade = State(initialValue: grade)
+        _classNumber = State(initialValue: classNumber)
+        _scheduleSettings = State(initialValue: scheduleSettings)
+    }
 
     var body: some View {
-        ZStack {
-            TabView(selection: $selectedIndex) {
-                ForEach(schedules.indices, id: \.self) { index in
-                    DayTimetableView(
-                        schedule: schedules[index],
-                        onChangeClass: { sheet = .changeClass },
-                        onChangeSchool: { sheet = .changeSchool }
-                    )
-                    .tag(index)
-                }
-            }
-            .tabViewStyle(.page)
-            .sheet(item: $sheet) { activeSheet in
-                switch activeSheet {
-                case .changeClass:
-                    ClassChangeFlowView(school: school) { grade, classNumber in
-                        UserSettingsStore.shared.saveSchool(school, grade: grade, classNumber: classNumber)
-                        sheet = nil
+        Group {
+            if let schedules {
+                ZStack {
+                    TabView(selection: $selectedIndex) {
+                        ForEach(schedules.indices, id: \.self) { index in
+                            DayTimetableView(
+                                schedule: schedules[index],
+                                onChangeClass: { sheet = .changeClass },
+                                onChangeSchool: { sheet = .changeSchool }
+                            )
+                            .tag(index)
+                        }
                     }
-                case .changeSchool:
-                    SchoolSetupFlowView { school, grade, classNumber in
-                        UserSettingsStore.shared.saveSchool(school, grade: grade, classNumber: classNumber)
-                        sheet = nil
-                    }
-                }
-            }
+                    .tabViewStyle(.page)
 
-            if !hasSeenSwipeGuide {
-                SwipeGuideOverlay {
-                    hasSeenSwipeGuide = true
+                    if !hasSeenSwipeGuide {
+                        SwipeGuideOverlay {
+                            hasSeenSwipeGuide = true
+                        }
+                    }
+                }
+                .onAppear { saveTodayPeriodsForWidget(schedules) }
+            } else if loadFailed {
+                TimetableLoadErrorView(
+                    onRetry: { Task { await loadTimetable() } },
+                    onChangeClass: { sheet = .changeClass },
+                    onChangeSchool: { sheet = .changeSchool }
+                )
+            } else {
+                ProgressView()
+            }
+        }
+        .sheet(item: $sheet) { activeSheet in
+            switch activeSheet {
+            case .changeClass:
+                ClassChangeFlowView(school: school) { newGrade, newClassNumber in
+                    UserSettingsStore.shared.saveSchool(school, grade: newGrade, classNumber: newClassNumber)
+                    grade = newGrade
+                    classNumber = newClassNumber
+                    sheet = nil
+                    Task { await loadTimetable() }
+                }
+            case .changeSchool:
+                SchoolSetupFlowView { newSchool, newGrade, newClassNumber in
+                    UserSettingsStore.shared.saveSchool(newSchool, grade: newGrade, classNumber: newClassNumber)
+                    school = newSchool
+                    grade = newGrade
+                    classNumber = newClassNumber
+                    sheet = nil
+                    Task { await loadTimetable() }
                 }
             }
         }
-        .onAppear(perform: saveTodayPeriodsForWidget)
+        .task { await loadTimetable() }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                selectedIndex = todayIndex
+                Task { await loadTimetable() }
+            }
+        }
     }
 
-    private func saveTodayPeriodsForWidget() {
+    private var todayIndex: Int {
+        schedules?.firstIndex { Calendar.current.isDateInToday($0.date) } ?? 0
+    }
+
+    private func loadTimetable() async {
+        let week = NEISAPIClient.currentWeekRange()
+        do {
+            schedules = try await apiClient.fetchTimetable(
+                school: school,
+                grade: grade,
+                classNumber: classNumber,
+                from: week.from,
+                to: week.to,
+                scheduleSettings: scheduleSettings
+            )
+            loadFailed = false
+        } catch {
+            schedules = nil
+            loadFailed = true
+        }
+    }
+
+    private func saveTodayPeriodsForWidget(_ schedules: [DaySchedule]) {
         let today = schedules.first { Calendar.current.isDateInToday($0.date) }
         let periods = (today?.periods ?? []).map {
             SharedPeriodInfo(subject: $0.subject, startTime: $0.startTime, endTime: $0.endTime)
@@ -156,7 +218,13 @@ private struct PeriodRowView: View {
 
 #Preview {
     TimetableView(
-        school: School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울특별시 서초구 효령로 197"),
-        schedules: DaySchedule.sampleWeek
+        school: School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울특별시 서초구 효령로 197", kind: .high),
+        grade: 2,
+        classNumber: 3,
+        scheduleSettings: ScheduleSettings(
+            dayStartTime: DateComponents(hour: 9, minute: 0),
+            lunchStartTime: DateComponents(hour: 12, minute: 30),
+            lunchEndTime: DateComponents(hour: 13, minute: 30)
+        )
     )
 }
