@@ -72,10 +72,16 @@ struct TimetableView: View {
                 }
             case .changeSchool:
                 SchoolSetupFlowView { newSchool, newGrade, newClassNumber in
+                    sheet = .newSchoolSchedule(newSchool, newGrade, newClassNumber)
+                }
+            case .newSchoolSchedule(let newSchool, let newGrade, let newClassNumber):
+                ScheduleSetupFlowView { newScheduleSettings in
                     UserSettingsStore.shared.saveSchool(newSchool, grade: newGrade, classNumber: newClassNumber)
+                    UserSettingsStore.shared.saveSchedule(newScheduleSettings)
                     school = newSchool
                     grade = newGrade
                     classNumber = newClassNumber
+                    scheduleSettings = newScheduleSettings
                     sheet = nil
                     Task { await loadTimetable() }
                 }
@@ -121,9 +127,10 @@ struct TimetableView: View {
     }
 }
 
-private enum TimetableSheet: Identifiable {
+private enum TimetableSheet: Identifiable, Hashable {
     case changeClass
     case changeSchool
+    case newSchoolSchedule(School, Int, Int)
 
     var id: Self { self }
 }
