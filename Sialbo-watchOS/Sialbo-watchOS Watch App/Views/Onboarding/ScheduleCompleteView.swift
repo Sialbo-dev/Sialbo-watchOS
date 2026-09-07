@@ -16,12 +16,8 @@ struct ScheduleCompleteView: View {
                 .ignoresSafeArea()
 
             VStack {
-                LogoHeaderView()
-                    .padding(.top, 10)
-                    .ignoresSafeArea(edges: .top)
-
                 Spacer()
-                    .frame(height: 15)
+                    .frame(height: 32)
 
                 Text("설정을 완료했어요!")
                     .font(.griun(16))
@@ -37,14 +33,14 @@ struct ScheduleCompleteView: View {
                     .multilineTextAlignment(.center)
 
                 Spacer()
-                    .frame(height: 37)
+                    .frame(height: 42)
 
                 Button("확인", action: onConfirm)
                     .buttonStyle(.glass)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)
-            .padding(.bottom, 3)
+            .padding(.bottom, 0)
         }
     }
 }
