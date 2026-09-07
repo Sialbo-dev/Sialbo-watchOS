@@ -14,6 +14,9 @@ struct ClassPickerView: View {
 
     @State private var grade = 1
     @State private var classNumber = 1
+    @State private var isChecking = false
+
+    private let apiClient = NEISAPIClient()
 
     var body: some View {
         ZStack {
@@ -52,21 +55,42 @@ struct ClassPickerView: View {
                     .frame(height: 20)
 
                 Button("선택") {
-                    // TODO: NEISAPIClient로 이 학년-반 시간표 존재 확인 후, 없으면 path.append(.classPickerInvalid)
-                    onConfirm(grade, classNumber)
+                    handleConfirm()
                 }
                 .buttonStyle(.glass)
+                .disabled(isChecking)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal,0)
             .padding(.bottom, 3)
         }
     }
+
+    private func handleConfirm() {
+        isChecking = true
+        Task {
+            defer { isChecking = false }
+            let week = NEISAPIClient.currentWeekRange()
+            let rawPeriods = (try? await apiClient.fetchRawTimetable(
+                school: school,
+                grade: grade,
+                classNumber: classNumber,
+                from: week.from,
+                to: week.to
+            )) ?? []
+
+            if rawPeriods.isEmpty {
+                path.append(.classPickerInvalid)
+            } else {
+                onConfirm(grade, classNumber)
+            }
+        }
+    }
 }
 
 #Preview {
     ClassPickerView(
-        school: School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울 효성구 어쩌구 어쩌로"),
+        school: School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울 효성구 어쩌구 어쩌로", kind: .high),
         path: .constant([]),
         onConfirm: { _, _ in }
     )

@@ -34,8 +34,8 @@ struct SchoolSearchResultsView: View {
     SchoolSearchResultsView(
         path: .constant([]),
         schools: [
-            School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울특별시 서초구 효령로 197"),
-            School(officeCode: "B10", schoolCode: "7010570", name: "서울고등학교", address: "서울특별시 서초구 우와아앙로"),
+            School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울특별시 서초구 효령로 197", kind: .high),
+            School(officeCode: "B10", schoolCode: "7010570", name: "서울고등학교", address: "서울특별시 서초구 우와아앙로", kind: .high),
         ]
     )
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 enum OnboardingRoute: Hashable {
-    case searchResults
+    case searchResults([School])
     case notFound
     case confirm(School)
     case classPicker(School)

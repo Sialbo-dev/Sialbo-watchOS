@@ -11,6 +11,9 @@ struct SchoolSearchPromptView: View {
     @Binding var path: [OnboardingRoute]
 
     @State private var query = ""
+    @State private var isSearching = false
+
+    private let apiClient = NEISAPIClient()
 
     var body: some View {
         ZStack {
@@ -32,8 +35,12 @@ struct SchoolSearchPromptView: View {
                 Spacer()
                     .frame(height: 35)
 
-                TextField("학교 이름", text: $query)
-                    .onSubmit(handleSearch)
+                if isSearching {
+                    ProgressView()
+                } else {
+                    TextField("학교 이름", text: $query)
+                        .onSubmit(handleSearch)
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)
@@ -42,11 +49,21 @@ struct SchoolSearchPromptView: View {
     }
 
     private func handleSearch() {
-        // TODO: NEISAPIClient 연동 후 실제 검색 결과로 교체
-        if query.trimmingCharacters(in: .whitespaces).isEmpty {
+        let trimmed = query.trimmingCharacters(in: .whitespaces)
+        guard !trimmed.isEmpty else {
             path.append(.notFound)
-        } else {
-            path.append(.searchResults)
+            return
+        }
+
+        isSearching = true
+        Task {
+            defer { isSearching = false }
+            let schools = (try? await apiClient.searchSchools(query: trimmed)) ?? []
+            if schools.isEmpty {
+                path.append(.notFound)
+            } else {
+                path.append(.searchResults(schools))
+            }
         }
     }
 }

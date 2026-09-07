@@ -65,7 +65,7 @@ struct SchoolConfirmView: View {
 
 #Preview {
     SchoolConfirmView(
-        school: School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울특별시 서초구 효령로 197"),
+        school: School(officeCode: "B10", schoolCode: "7010569", name: "서울고등학교", address: "서울특별시 서초구 효령로 197", kind: .high),
         path: .constant([])
     )
 }
