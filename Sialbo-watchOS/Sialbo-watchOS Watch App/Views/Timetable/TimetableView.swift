@@ -176,7 +176,10 @@ private struct DayTimetableView: View {
     }
 
     private var nextPeriod: Period? {
-        schedule.periods.first { $0.endTime > .now } ?? schedule.periods.last
+        guard Calendar.current.isDateInToday(schedule.date) else {
+            return schedule.periods.first
+        }
+        return schedule.periods.first { $0.endTime > .now } ?? schedule.periods.last
     }
 
     private var headerTitle: String {
