@@ -41,7 +41,7 @@ struct TimetableHeaderView: View {
             }
             .padding(.horizontal, 8)
         }
-        .frame(height: 40)
+        .frame(height: 50)
         .offset(y: -45)
         .padding(.bottom, -45)
     }
