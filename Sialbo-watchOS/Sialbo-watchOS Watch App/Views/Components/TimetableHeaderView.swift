@@ -11,6 +11,7 @@ struct TimetableHeaderView: View {
     var title: String = "시얼보"
     var onChangeClass: () -> Void
     var onChangeSchool: () -> Void
+    var onChangeSchedule: () -> Void
 
     @State private var showsMenu = false
 
@@ -33,6 +34,7 @@ struct TimetableHeaderView: View {
                 .confirmationDialog("", isPresented: $showsMenu) {
                     Button("학급 변경", action: onChangeClass)
                     Button("학교 변경", action: onChangeSchool)
+                    Button("일과시간 변경", action: onChangeSchedule)
                 }
 
                 Spacer()
@@ -46,5 +48,5 @@ struct TimetableHeaderView: View {
 }
 
 #Preview {
-    TimetableHeaderView(onChangeClass: {}, onChangeSchool: {})
+    TimetableHeaderView(onChangeClass: {}, onChangeSchool: {}, onChangeSchedule: {})
 }

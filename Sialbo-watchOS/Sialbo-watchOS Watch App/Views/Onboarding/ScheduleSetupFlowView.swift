@@ -12,12 +12,22 @@ struct ScheduleSetupFlowView: View {
 
     @State private var path: [ScheduleSetupRoute] = []
 
-    @State private var dayStartHour = 9
-    @State private var dayStartMinute = 0
-    @State private var lunchStartHour = 12
-    @State private var lunchStartMinute = 0
-    @State private var lunchEndHour = 13
-    @State private var lunchEndMinute = 0
+    @State private var dayStartHour: Int
+    @State private var dayStartMinute: Int
+    @State private var lunchStartHour: Int
+    @State private var lunchStartMinute: Int
+    @State private var lunchEndHour: Int
+    @State private var lunchEndMinute: Int
+
+    init(initial: ScheduleSettings? = nil, onFinish: @escaping (ScheduleSettings) -> Void) {
+        self.onFinish = onFinish
+        _dayStartHour = State(initialValue: initial?.dayStartTime.hour ?? 9)
+        _dayStartMinute = State(initialValue: initial?.dayStartTime.minute ?? 0)
+        _lunchStartHour = State(initialValue: initial?.lunchStartTime.hour ?? 12)
+        _lunchStartMinute = State(initialValue: initial?.lunchStartTime.minute ?? 0)
+        _lunchEndHour = State(initialValue: initial?.lunchEndTime.hour ?? 13)
+        _lunchEndMinute = State(initialValue: initial?.lunchEndTime.minute ?? 0)
+    }
 
     var body: some View {
         NavigationStack(path: $path) {

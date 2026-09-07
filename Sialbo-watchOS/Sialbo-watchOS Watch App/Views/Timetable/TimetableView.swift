@@ -36,7 +36,8 @@ struct TimetableView: View {
                             DayTimetableView(
                                 schedule: schedule,
                                 onChangeClass: { sheet = .changeClass },
-                                onChangeSchool: { sheet = .changeSchool }
+                                onChangeSchool: { sheet = .changeSchool },
+                                onChangeSchedule: { sheet = .changeSchedule }
                             )
                             .tag(index)
                         }
@@ -54,7 +55,8 @@ struct TimetableView: View {
                 TimetableLoadErrorView(
                     onRetry: { Task { await loadTimetable() } },
                     onChangeClass: { sheet = .changeClass },
-                    onChangeSchool: { sheet = .changeSchool }
+                    onChangeSchool: { sheet = .changeSchool },
+                    onChangeSchedule: { sheet = .changeSchedule }
                 )
             } else {
                 ProgressView()
@@ -81,6 +83,13 @@ struct TimetableView: View {
                     school = newSchool
                     grade = newGrade
                     classNumber = newClassNumber
+                    scheduleSettings = newScheduleSettings
+                    sheet = nil
+                    Task { await loadTimetable() }
+                }
+            case .changeSchedule:
+                ScheduleSetupFlowView(initial: scheduleSettings) { newScheduleSettings in
+                    UserSettingsStore.shared.saveSchedule(newScheduleSettings)
                     scheduleSettings = newScheduleSettings
                     sheet = nil
                     Task { await loadTimetable() }
@@ -131,6 +140,7 @@ private enum TimetableSheet: Identifiable, Hashable {
     case changeClass
     case changeSchool
     case newSchoolSchedule(School, Int, Int)
+    case changeSchedule
 
     var id: Self { self }
 }
@@ -160,6 +170,7 @@ private struct DayTimetableView: View {
     let schedule: DaySchedule
     var onChangeClass: () -> Void
     var onChangeSchool: () -> Void
+    var onChangeSchedule: () -> Void
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -178,7 +189,7 @@ private struct DayTimetableView: View {
             }
         }
         .safeAreaInset(edge: .top) {
-            TimetableHeaderView(title: headerTitle, onChangeClass: onChangeClass, onChangeSchool: onChangeSchool)
+            TimetableHeaderView(title: headerTitle, onChangeClass: onChangeClass, onChangeSchool: onChangeSchool, onChangeSchedule: onChangeSchedule)
         }
     }
 

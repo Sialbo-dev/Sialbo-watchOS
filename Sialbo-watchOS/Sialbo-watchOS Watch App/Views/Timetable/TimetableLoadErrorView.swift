@@ -11,6 +11,7 @@ struct TimetableLoadErrorView: View {
     var onRetry: () -> Void
     var onChangeClass: () -> Void
     var onChangeSchool: () -> Void
+    var onChangeSchedule: () -> Void
 
     @State private var showsMenu = false
 
@@ -62,6 +63,7 @@ struct TimetableLoadErrorView: View {
             .confirmationDialog("", isPresented: $showsMenu) {
                 Button("학급 변경", action: onChangeClass)
                 Button("학교 변경", action: onChangeSchool)
+                Button("일과시간 변경", action: onChangeSchedule)
             }
             .padding(.top, 5)
             .padding(.leading, 8)
@@ -71,5 +73,5 @@ struct TimetableLoadErrorView: View {
 }
 
 #Preview {
-    TimetableLoadErrorView(onRetry: {}, onChangeClass: {}, onChangeSchool: {})
+    TimetableLoadErrorView(onRetry: {}, onChangeClass: {}, onChangeSchool: {}, onChangeSchedule: {})
 }
