@@ -11,6 +11,7 @@ struct TimePickerView: View {
     let title: String
     @Binding var hour: Int
     @Binding var minute: Int
+    var errorMessage: String? = nil
     let onConfirm: () -> Void
 
     var body: some View {
@@ -24,6 +25,13 @@ struct TimePickerView: View {
                     .foregroundStyle(.titleYellow)
                     .multilineTextAlignment(.center)
                     .padding(.top, 7)
+
+                if let errorMessage {
+                    Text(errorMessage)
+                        .font(.griun(11))
+                        .foregroundStyle(.red)
+                        .multilineTextAlignment(.center)
+                }
 
                 Spacer()
                     .frame(height: 12)

@@ -19,6 +19,9 @@ struct ScheduleSetupFlowView: View {
     @State private var lunchEndHour: Int
     @State private var lunchEndMinute: Int
 
+    @State private var lunchStartError: String?
+    @State private var lunchEndError: String?
+
     init(initial: ScheduleSettings? = nil, onFinish: @escaping (ScheduleSettings) -> Void) {
         self.onFinish = onFinish
         _dayStartHour = State(initialValue: initial?.dayStartTime.hour ?? 9)
@@ -41,11 +44,21 @@ struct ScheduleSetupFlowView: View {
                         path.append(.lunchStart)
                     }
                 case .lunchStart:
-                    TimePickerView(title: "점심시간 시작 시간", hour: $lunchStartHour, minute: $lunchStartMinute) {
+                    TimePickerView(title: "점심시간 시작 시간", hour: $lunchStartHour, minute: $lunchStartMinute, errorMessage: lunchStartError) {
+                        guard minutes(lunchStartHour, lunchStartMinute) > minutes(dayStartHour, dayStartMinute) else {
+                            lunchStartError = "1교시 시작 시간보다 늦어야 해요."
+                            return
+                        }
+                        lunchStartError = nil
                         path.append(.lunchEnd)
                     }
                 case .lunchEnd:
-                    TimePickerView(title: "점심시간 종료 시간", hour: $lunchEndHour, minute: $lunchEndMinute) {
+                    TimePickerView(title: "점심시간 종료 시간", hour: $lunchEndHour, minute: $lunchEndMinute, errorMessage: lunchEndError) {
+                        guard minutes(lunchEndHour, lunchEndMinute) > minutes(lunchStartHour, lunchStartMinute) else {
+                            lunchEndError = "점심시간 시작 시간보다 늦어야 해요."
+                            return
+                        }
+                        lunchEndError = nil
                         path.append(.complete)
                     }
                 case .complete:
@@ -61,6 +74,10 @@ struct ScheduleSetupFlowView: View {
                 }
             }
         }
+    }
+
+    private func minutes(_ hour: Int, _ minute: Int) -> Int {
+        hour * 60 + minute
     }
 }
 
