@@ -50,7 +50,6 @@ struct TimetableView: View {
                         }
                     }
                 }
-                .onAppear { saveTodayPeriodsForWidget(schedules) }
             } else if loadFailed {
                 TimetableLoadErrorView(
                     onRetry: { Task { await loadTimetable() } },
@@ -111,7 +110,7 @@ struct TimetableView: View {
     private func loadTimetable() async {
         let week = NEISAPIClient.currentWeekRange()
         do {
-            schedules = try await apiClient.fetchTimetable(
+            let fetched = try await apiClient.fetchTimetable(
                 school: school,
                 grade: grade,
                 classNumber: classNumber,
@@ -119,8 +118,10 @@ struct TimetableView: View {
                 to: week.to,
                 scheduleSettings: scheduleSettings
             )
+            schedules = fetched
             loadFailed = false
             selectedIndex = todayIndex
+            saveTodayPeriodsForWidget(fetched)
         } catch {
             schedules = nil
             loadFailed = true
