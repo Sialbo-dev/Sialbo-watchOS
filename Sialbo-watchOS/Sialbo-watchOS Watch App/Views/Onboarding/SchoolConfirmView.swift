@@ -40,7 +40,7 @@ struct SchoolConfirmView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
-                    .buttonStyle(.glass)
+                    .glassButtonStyle()
                     .buttonBorderShape(.circle)
                     .frame(width: 34, height: 34)
 
@@ -51,7 +51,7 @@ struct SchoolConfirmView: View {
                     } label: {
                         Image(systemName: "checkmark")
                     }
-                    .buttonStyle(.glass)
+                    .glassButtonStyle()
                     .buttonBorderShape(.circle)
                     .frame(width: 34, height: 34)
                 }

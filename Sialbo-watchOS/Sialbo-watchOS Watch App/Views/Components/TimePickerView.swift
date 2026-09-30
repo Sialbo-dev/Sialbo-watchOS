@@ -66,7 +66,7 @@ struct TimePickerView: View {
                 Spacer()
 
                 Button("확인", action: onConfirm)
-                    .buttonStyle(.glass)
+                    .glassButtonStyle()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)

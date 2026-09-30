@@ -36,7 +36,7 @@ struct ScheduleCompleteView: View {
                     .frame(height: 42)
 
                 Button("확인", action: onConfirm)
-                    .buttonStyle(.glass)
+                    .glassButtonStyle()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)

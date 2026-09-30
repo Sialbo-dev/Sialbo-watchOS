@@ -28,7 +28,7 @@ struct ErrorRetryView: View {
                 Spacer()
 
                 Button("다시 시도", action: onRetry)
-                    .buttonStyle(.glass)
+                    .glassButtonStyle()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)

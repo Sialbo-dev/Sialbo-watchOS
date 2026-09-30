@@ -45,7 +45,7 @@ struct TimetableLoadErrorView: View {
                     .frame(height: 40)
 
                 Button("확인", action: onRetry)
-                    .buttonStyle(.glass)
+                    .glassButtonStyle()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 0)
@@ -57,7 +57,7 @@ struct TimetableLoadErrorView: View {
             } label: {
                 Image(systemName: "ellipsis")
             }
-            .buttonStyle(.glass)
+            .glassButtonStyle()
             .buttonBorderShape(.circle)
             .frame(width: 32, height: 32)
             .confirmationDialog("", isPresented: $showsMenu) {

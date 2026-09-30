@@ -57,7 +57,7 @@ struct ClassPickerView: View {
                 Button("선택") {
                     handleConfirm()
                 }
-                .buttonStyle(.glass)
+                .glassButtonStyle()
                 .disabled(isChecking)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

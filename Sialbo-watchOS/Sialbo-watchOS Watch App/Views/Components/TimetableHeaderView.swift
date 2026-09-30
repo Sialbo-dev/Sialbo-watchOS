@@ -28,7 +28,7 @@ struct TimetableHeaderView: View {
                 } label: {
                     Image(systemName: "ellipsis")
                 }
-                .buttonStyle(.glass)
+                .glassButtonStyle()
                 .buttonBorderShape(.circle)
                 .frame(width: 32, height: 32)
                 .confirmationDialog("", isPresented: $showsMenu) {
