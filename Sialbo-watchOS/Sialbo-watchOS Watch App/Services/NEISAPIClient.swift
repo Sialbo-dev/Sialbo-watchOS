@@ -23,6 +23,7 @@ struct NEISAPIClient {
     // 학교 검색
 
     func searchSchools(query: String) async throws -> [School] {
+        let query = query.filter { !$0.isWhitespace }
         var components = URLComponents(string: "\(baseURL)/schoolInfo")!
         components.queryItems = [
             URLQueryItem(name: "KEY", value: Secrets.neisAPIKey),
